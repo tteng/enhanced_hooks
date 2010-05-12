@@ -18,16 +18,10 @@ module EventMachine
   
   def reporter_around_filter
     
-    #puts "HAS #{@@reporter_events.size} events"
-
-    # Simpliest possible cache impl.
     events_load_bm = Benchmark.measure do
       load_events if @@reporter_events.empty?
     end
     
-    #puts 'Events loading stats:'
-    #puts events_load_bm
-
     events = @@reporter_events.select {|e| e.match_event?(self.class, action_name)}
 
     # Calling all before actions for this controler and action
@@ -64,10 +58,8 @@ module EventMachine
   def load_event(file)
     clear_events if test?
     code = File.new(file).readlines.join('')
-    #logger.info "ReportsEngine: Loading #{File.basename(file)}..."
     begin
       instance_eval code, __FILE__, __LINE__
-      #logger.info "ReportsEngine: Loading Done"
     rescue => e
       logger.warn "FAILED!"
       logger.warn e.backtrace
@@ -84,6 +76,37 @@ module EventMachine
   
   def test?
     ENV["RAILS_ENV"] == "test"
+  end
+
+  class EventMeta
+
+    def initialize(controller_class, name, &block)
+      @controller_class = controller_class
+      @action = name
+      self.instance_eval(&block)
+    end
+
+    def call_before(controller_instance)
+      controller_instance.instance_eval(&@before) if @before
+    end
+    
+    def call_after(controller_instance)
+      controller_instance.instance_eval(&@after) if @after
+    end
+
+    def match_event?(clazz, action_name)
+      @controller_class == clazz && @action.to_s == action_name.to_s
+    end
+    private
+    
+    def before(&block)
+      @before = block
+    end
+
+    def after(&block)
+      @after = block
+    end
+
   end
     
 end

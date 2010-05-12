@@ -1,4 +1,4 @@
-class EventGenerator < Rails::Generator::NamedBase
+class EventMachineGenerator < Rails::Generator::NamedBase
 
   def initialize(runtime_args, runtime_options = {})
     super

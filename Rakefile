@@ -5,8 +5,8 @@ begin
   require 'jeweler'
   Jeweler::Tasks.new do |gem|
     gem.name = "event_machine"
-    gem.summary = %Q{TODO: one-line summary of your gem}
-    gem.description = %Q{TODO: longer description of your gem}
+    gem.summary = %Q{an observer to record events}
+    gem.description = %Q{Event Machine is observer to record any action you want to keep an eye on}
     gem.email = "tim.rubist@gmail.com"
     gem.homepage = "http://github.com/tteng/event_machine"
     gem.authors = ["tim.teng"]
