@@ -1,18 +1,15 @@
 = event_machine
- With event machine, you can keep an eye on any action on your rails controller, say in your sns website, 
-when user posts a blog, you need to notice all of his friends, but it's really urgly to do like this:
+With event machine, you can keep an eye on any action on your rails controller, say in your sns website, when user posts a blog, you need to notice all of his friends, but it's really urgly to do like this:
 
-BlogController:
+  BlogController:
+    def create
+      # new and save code
+      notice_all_friends
+    end
+  end
 
-def create
- # new and save code
- notice_all_friends
-end
-
-end
-
-  let's take another scenario, in your sns site, when one user makes friends with the other one, we should notice all friends of these two people, but how to?
-  we'd beeter have an observer on the action, the code in the make_friends action block only concerns about building relationship between the two people, the observer then notice other people, and this is also what IoC(AOP) teach us.
+let's take another scenario, in your sns site, when one user makes friends with the other one, we should notice all friends of these two people, but how to?
+we'd beeter have an observer on the action, the code in the make_friends action block only concerns about building relationship between the two people, the observer then notice other people, and this is also what IoC(AOP) teach us.  
 
 Usage:
 
@@ -22,9 +19,9 @@ in your config/environment.rb:
 
 application_controller.rb:
 
-class ApplicationController < ActionController::Base
-  include EventMachine
-end
+  class ApplicationController < ActionController::Base
+    include EventMachine
+  end
 
 and the generate command :
 
@@ -50,7 +47,7 @@ now you can add your code in the block and after block, enjoy.
 
 = to observe multiple actions 
 
-  to observe multiple actions, you should:
+to observe multiple actions, you should:
 
   for_actions [[FavoritesController, :create], [BlogsController,:create]] do
 
