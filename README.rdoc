@@ -2,8 +2,6 @@
  With event machine, you can keep an eye on any action on your rails controller, say in your sns website, 
 when user posts a blog, you need to notice all of his friends, but it's really urgly to do like this:
 
-<pre>
-
 BlogController:
 
 def create
@@ -13,12 +11,8 @@ end
 
 end
 
-</pre>
-
-  let's take another scenario, in your sns site, when one user makes friends with the other one, we should notice 
-all friends of these two people, but how to?
-  we'd beeter have an observer on the action, the code in the make_friends action block only concerns about building
-relationship between the two people, the observer then notice other people, and this is also what IoC(AOP) teach us.
+  let's take another scenario, in your sns site, when one user makes friends with the other one, we should notice all friends of these two people, but how to?
+  we'd beeter have an observer on the action, the code in the make_friends action block only concerns about building relationship between the two people, the observer then notice other people, and this is also what IoC(AOP) teach us.
 
 Usage:
 
@@ -28,13 +22,10 @@ in your config/environment.rb:
 
 and the generate command :
 
-<pre>
   ~your_project_path> script/generate event_machine create_favorite FavoriteController create 
-</pre>
 
 then it will generate a event file which content like following:
 
-<pre>
 
   for_action FavoritesController, :create do
 
@@ -48,7 +39,6 @@ then it will generate a event file which content like following:
 
   end
 
-</pre>
 
 now you can add your code in the block and after block, enjoy.
 
@@ -56,7 +46,6 @@ now you can add your code in the block and after block, enjoy.
 
   to observe multiple actions, you should:
 
-<pre>
   for_actions [[FavoritesController, :create], [BlogsController,:create]] do
 
     before do
@@ -68,8 +57,6 @@ now you can add your code in the block and after block, enjoy.
     end
 
   end
-
-</pre>
 
 
 == Note on Patches/Pull Requests
