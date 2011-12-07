@@ -1,43 +1,31 @@
-class EventMachineGenerator < Rails::Generator::NamedBase
+#coding: utf-8
+require 'fileutils'
 
-  def initialize(runtime_args, runtime_options = {})
-    super
-    @event_name = runtime_args.shift
-    @controller_name = runtime_args.shift
-    @controller_action = runtime_args.shift
-    unless valid_options?
-      puts "Invalid arguments!"
-      puts banner
-      exit
-    end
-  end
+class EventMachineGenerator < Rails::Generators::Base
 
-  def manifest
-    record do |m|
-      m.directory "app/events"
-      m.directory "test/functional/events"
-      m.template "event.rb",
-        File.join('app/events', "#{@event_name}Event".underscore + ".rb"),
-        :assigns => { :controller => @controller_name, :action => @controller_action }
+  source_root File.expand_path('../templates', __FILE__)
 
-      m.template "functional_test.rb",
-        File.join('test/functional/events', "#{@event_name}Event".underscore + "_test.rb"),
-          :assigns => { :controller => @controller_name,
-                        :action => @controller_action,
-                        :event => "#{@event_name}Event"
-                      }
-    end
-  end
+  argument :this_event_name, :type => :string
+  argument :controller_name, :type => :string
+  argument :action_name, :type => :string
 
-  def banner
-    "Usage: #{$0} event EventName Controller Action"
-    "Example: #{$0} event media_rated Admin::ContentController rate"
+  def generate_event
+    template "event.rb", "app/events/#{parsed_event_name}_event.rb"
+    template "functional_test.rb", "test/functional/events/#{parsed_event_name}_test.rb"
   end
 
   private
 
-  def valid_options?
-    [@event_name, @controller_name, @controller_action].all? { |v| !v.blank? }
+  def parsed_event_name
+    this_event_name.underscore
+  end
+
+  def parsed_controller_name
+    controller_name.camelize
+  end
+
+  def parsed_action_name 
+    action_name.underscore
   end
 
 end

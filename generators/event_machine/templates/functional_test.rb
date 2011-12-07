@@ -1,21 +1,21 @@
 require File.dirname(__FILE__) + '/../../test_helper'
 require File.dirname(__FILE__) + '/../../functional/events/events_base_test'
-require '<%= controller.underscore -%>'
+require '<%= parsed_controller_name.underscore -%>_controller'
 
 # Re-raise errors caught by the controller.
-class <%= controller.classify -%>; def rescue_action(e) raise e end; end
+class <%= parsed_controller_name -%>; def rescue_action(e) raise e end; end
 
-class <%= event.classify -%>Test < EventBaseTest
+class <%= parsed_event_name.camelize -%>Test < EventBaseTest
   
   fixtures :users
   
   def setup
-    @controller = <%= controller.classify -%>.new
+    @controller = <%= parsed_controller_name.camelize-%>.new
     @request = ActionController::TestRequest.new
     @response = ActionController::TestResponse.new
     
     prepare
-    load_event "#{EVENTS_DIR}/<%= event.underscore -%>.rb"
+    load_event "app/events/<%= parsed_event_name-%>_event.rb"
     emulate_login
   end
   

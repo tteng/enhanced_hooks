@@ -15,7 +15,7 @@ Usage:
 
 in your config/environment.rb:
 
-    config.gem "event_machine", :version => ">=0.2.0"
+    gem "event_machine", :version => ">=0.2.1"
 
 application_controller.rb:
 
@@ -25,7 +25,7 @@ application_controller.rb:
 
 and the generate command :
 
-  ~your_project_path> script/generate event_machine create_favorite FavoriteController create 
+  ~your_project_path> rails g event_machine create_favorite FavoriteController create 
 
 then it will generate a event file which content like following:
 

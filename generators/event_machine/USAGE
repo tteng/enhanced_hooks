@@ -1,2 +1,2 @@
-Usage: ./script/generate event EventName Controller Action
-Example: ./script/generate event media_rated Admin::ContentController rate_media
+Usage: rails g event_machine EventName Controller Action
+Example: rails g event_machine media_rated Admin::ContentController rate_media
