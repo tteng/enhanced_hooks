@@ -3,7 +3,7 @@ require 'benchmark'
 
 module EventMachine 
 
-  EVENTS_DIR = (defined?(RAILS_ROOT) ? "#{RAILS_ROOT}/app/events" : "app/events")
+  EVENTS_DIR = "events"
   
   def self.included(base)
     class_eval <<-EOF 
