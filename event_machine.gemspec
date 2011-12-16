@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = "event_machine"
-  s.version = "0.3.0"
+  s.version = "0.3.1"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["tim.teng"]
-  s.date = "2011-12-07"
+  s.date = "2011-12-16"
   s.description = "Event Machine is observer to record any action you want to keep an eye on"
   s.email = "tim.rubist@gmail.com"
   s.extra_rdoc_files = [
