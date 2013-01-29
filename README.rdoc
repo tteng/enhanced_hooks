@@ -13,7 +13,7 @@ we'd beeter have an observer on the action, the code in the make_friends action 
 
 Usage:
 
-in your config/environment.rb:
+in your Gemfile:
 
     gem "event_machine", :version => ">=0.4.1"
 
