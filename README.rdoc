@@ -9,25 +9,21 @@ With event machine, you can keep an eye on any action on your rails controller, 
   end
 
 let's take another scenario, in your sns site, when one user makes friends with the other one, we should notice all friends of these two people, but how to?
-we'd beeter have an observer on the action, the code in the make_friends action block only concerns about building relationship between the two people, the observer then notice other people, and this is also what IoC(AOP) teach us.  
+we'd beeter have an observer on the action, the code in the make_friends action block only concerns about building relationship between the two people, the observer then notice other people on fly.  
 
 Usage:
 
 in your config/environment.rb:
 
-    gem "event_machine", :version => ">=0.2.1"
-
-application_controller.rb:
-
-  class ApplicationController < ActionController::Base
-    include EventMachine
-  end
+    gem "event_machine", :version => ">=0.4.1"
 
 and the generate command :
 
-  ~your_project_path> rails g event_machine create_favorite FavoriteController create 
+  ~your_project_path> rails g event_machine create_favorite Favorites create 
 
-then it will generate a event file which content like following:
+here 'create_event' stands for the event name, and 'Favorites' 'create' for which contorller#action to observe
+
+then it will generate a event file named create_favorite_event.rb under the Rails.root/events directory,  which content like following:
 
 
   for_action FavoritesController, :create do
