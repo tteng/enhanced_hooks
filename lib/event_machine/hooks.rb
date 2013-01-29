@@ -5,7 +5,7 @@ module EventMachine
 
   module Hooks
     
-    EVENTS_DIR = "app/events"
+    EVENTS_DIR = "events"
     
     def self.included(base)
       class_eval <<-EOF 

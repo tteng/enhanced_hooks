@@ -7,7 +7,7 @@ class EventMachineGenerator < Rails::Generators::Base
   argument :action_name,     :type => :string
 
   def generate_event
-    template "event.rb", "app/events/#{parsed_event_name}_event.rb"
+    template "event.rb", "#{EventMachine::Hooks::EVENTS_DIR}/#{parsed_event_name}_event.rb"
     template "functional_test.rb", "test/functional/events/#{parsed_event_name}_test.rb"
   end
 
