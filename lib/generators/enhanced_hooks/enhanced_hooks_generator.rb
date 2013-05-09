@@ -1,5 +1,5 @@
 require 'rails/generators'
-class EventMachineGenerator < Rails::Generators::Base
+class EnhancedHooksGenerator < Rails::Generators::Base
   source_root File.expand_path('../templates', __FILE__)
 
   argument :this_event_name, :type => :string
@@ -7,7 +7,7 @@ class EventMachineGenerator < Rails::Generators::Base
   argument :action_name,     :type => :string
 
   def generate_event
-    template "event.rb", "#{EventMachine::Hooks::EVENTS_DIR}/#{parsed_event_name}_event.rb"
+    template "event.rb", "#{EnhancedHooks::Hooks::EVENTS_DIR}/#{parsed_event_name}_event.rb"
     template "functional_test.rb", "test/functional/events/#{parsed_event_name}_test.rb"
   end
 

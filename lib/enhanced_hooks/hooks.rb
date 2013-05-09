@@ -1,7 +1,7 @@
 require "pp"
 require 'benchmark'
 
-module EventMachine 
+module EnhancedHooks 
 
   module Hooks
     

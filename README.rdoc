@@ -1,5 +1,5 @@
-= event_machine
-With event machine, you can keep an eye on any action on your rails controller, say in your sns website, when user posts a blog, you need to notice all of his friends, but it's really urgly to do like this:
+= enhanced_hooks
+With enhanced hooks, you can keep an eye on any action on your rails controller, say in your sns website, when user posts a blog, you need to notice all of his friends, but it's really urgly to do like this:
 
   BlogController:
     def create
@@ -15,11 +15,11 @@ Usage:
 
 in your Gemfile:
 
-    gem "event_machine", :version => ">=0.4.1"
+    gem "enhanced_hooks", :version => ">=0.4.1"
 
 and the generate command :
 
-  ~your_project_path> rails g event_machine create_favorite Favorites create 
+  ~your_project_path> rails g enhanced_hooks create_favorite Favorites create 
 
 here 'create_event' stands for the event name, and 'Favorites' 'create' for which contorller#action to observe
 
